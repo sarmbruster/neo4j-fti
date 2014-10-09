@@ -11,7 +11,7 @@ repositories {
 }
 
 ext {
-    neo4jVersion = "2.1.4"
+    neo4jVersion = "2.1.5"
     jerseyVersion = "1.9"
 }
 
