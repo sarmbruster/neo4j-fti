@@ -1,5 +1,7 @@
 package org.neo4j.contrib.fti
 
+import org.apache.lucene.index.Term
+import org.apache.lucene.search.regex.RegexQuery
 import org.junit.Rule
 import org.neo4j.contrib.fti.analyzers.English
 import org.neo4j.contrib.fti.analyzers.German
@@ -50,7 +52,7 @@ class FullTextIndexingKernelExtensionSpec extends Specification {
 
         // wait for indexes established by extension being available
         while (!indexManager.existsForNodes(indexName))  {
-            sleep 1
+            sleep 5
         }
 
         def index = indexManager.forNodes(indexName)
@@ -70,5 +72,10 @@ class FullTextIndexingKernelExtensionSpec extends Specification {
         "fulltext_de" | "Auf der Straße stehen fünf Häuser" | "Strasse"  | 1
         "fulltext_de" | "Auf der Straße stehen fünf Häuser" | "Häuser"   | 1
         "fulltext_de" | "Auf der Straße stehen fünf Häuser" | "Haus"     | 1
+        "fulltext_de" | "Auf der Straße stehen fünf Häuser" | "haus"     | 1
+        "fulltext_de" | "Auf der Straße stehen fünf Häuser" | "h.*s"     | 0
+        "fulltext_de" | "Auf der Straße stehen fünf Häuser" | new RegexQuery( new Term("description", "h.*s")    ) | 1
     }
+
+
 }

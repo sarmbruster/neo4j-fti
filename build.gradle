@@ -13,6 +13,7 @@ repositories {
 ext {
     neo4jVersion = "2.1.5"
     jerseyVersion = "1.9"
+    luceneVersion = "3.6.2" // NB: make sure to use the same version shipping with Neo4j
 }
 
 version = "0.1"
@@ -23,7 +24,8 @@ dependencies {
     compile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion
     compile group: 'org.neo4j', name: 'neo4j-lucene-index', version: neo4jVersion
     compile group: 'org.neo4j', name: 'server-api', version: neo4jVersion
-    compile 'org.apache.lucene:lucene-analyzers:3.6.2'
+    compile group: 'org.apache.lucene', name: 'lucene-analyzers', version: luceneVersion
+    compile group: 'org.apache.lucene', name: 'lucene-queries', version: luceneVersion
     testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
     testCompile "org.neo4j.contrib:neo4j-spock-extension:0.4"
     testCompile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion, classifier: 'tests'
