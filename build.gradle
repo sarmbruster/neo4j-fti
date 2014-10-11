@@ -26,6 +26,7 @@ dependencies {
     compile group: 'org.neo4j', name: 'server-api', version: neo4jVersion
     compile group: 'org.apache.lucene', name: 'lucene-analyzers', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-queries', version: luceneVersion
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.7'
     testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
     testCompile "org.neo4j.contrib:neo4j-spock-extension:0.4"
     testCompile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion, classifier: 'tests'
