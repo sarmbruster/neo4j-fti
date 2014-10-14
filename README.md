@@ -17,3 +17,9 @@ To use this extension:
 * the config property `fullTextIndexes` contains a comma seperated list of `<indexName>`:`<analyzerClass>` pairs
 * upon neo4j startup the indexes will be created
 * be aware these are manual indexes, so populating them is up to you
+
+Optionally this project features a Neo4j unmanaged extension to run regex queries on a manual index. To activate this, set in your ´neo4j-server.properties`
+
+    org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.contrib.fti=/regex
+
+By sending an http GET to http://localhost:7474/regex/<indexname>/<field>/<regex> you get back a list of node ids matching your query.
