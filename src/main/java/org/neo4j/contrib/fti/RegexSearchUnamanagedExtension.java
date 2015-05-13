@@ -29,7 +29,6 @@ public class RegexSearchUnamanagedExtension {
 
     private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-
     @GET
     @Path("{field}/{regex}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +54,5 @@ public class RegexSearchUnamanagedExtension {
                     .type(MediaType.APPLICATION_JSON).build();
         }
     }
-
-
 
 }
