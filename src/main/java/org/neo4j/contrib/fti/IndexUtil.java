@@ -1,8 +1,10 @@
 package org.neo4j.contrib.fti;
 
 import org.neo4j.graphdb.index.IndexManager;
+import org.neo4j.helpers.collection.MapUtil;
 
 import java.util.Collections;
+import java.util.Map;
 
 public class IndexUtil {
 
@@ -10,7 +12,14 @@ public class IndexUtil {
         if (indexManager.existsForNodes(indexName)) {
             throw new IllegalStateException("Index " + indexName + " does already exist!"); // TODO: consider not throwing an exception and silently do nothing
         } else {
-            indexManager.forNodes(indexName, Collections.singletonMap("analyzer", analyzerClassName));
+
+            Map<String, String> params;
+            if ("fulltext".equals(analyzerClassName)) {
+                params = MapUtil.stringMap("type", "fulltext");
+            } else {
+                params = MapUtil.stringMap("analyzer", analyzerClassName);
+            }
+            indexManager.forNodes(indexName, params);
         }
     }
 
