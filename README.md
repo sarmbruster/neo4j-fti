@@ -1,5 +1,7 @@
 # Neo4j fulltext indexing enhancements
 
+![Travis CI status](https://travis-ci.org/sarmbruster/neo4j-fti.svg?branch=master)
+
 This project provides enhancements to Neo4j's fulltext indexing capabilities. Fulltext indexes are legacy indexes configured with a specific analyzer. 
 
 Lucene features language specific analyzers, e.g. for German, English, etc. To integrate them with Neo4j we need to wrap them since they do not provide a default no-arg constructor which is expected by Neo4j.
