@@ -12,9 +12,10 @@ To use this extension:
 * copy http://central.maven.org/maven2/org/apache/lucene/lucene-analyzers/3.6.2/lucene-analyzers-3.6.2.jar to `<NEO4J_DIR>/plugins`
 * setting up fulltext indexes in `neo4j.properties` using
 
-    fullTextIndexes: "fulltext_de:org.neo4j.contrib.fti.analyzers.German,fulltext_en:org.neo4j.contrib.fti.analyzers.English"
-
+    fullTextIndexes="fulltext_de:org.neo4j.contrib.fti.analyzers.German,fulltext_en:org.neo4j.contrib.fti.analyzers.English,generic:fulltext"
+    
 * the config property `fullTextIndexes` contains a comma seperated list of `<indexName>`:`<analyzerClass>` pairs
+* Using a value of `fulltext` for `analyzerClass` creates a non-language specific fulltext index.  
 * upon neo4j startup the indexes will be created
 * be aware these are manual indexes, so populating them is up to you
 
