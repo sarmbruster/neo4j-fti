@@ -41,6 +41,11 @@ dependencies {
     testCompile group: 'org.neo4j.app', name: 'neo4j-server', version: neo4jVersion
     testCompile group: 'com.sun.jersey', name: 'jersey-core', version: jerseyVersion
     testCompile group: 'com.sun.jersey', name: 'jersey-client', version: jerseyVersion
+
+    fat group: 'org.apache.lucene', name: 'lucene-analyzers', version: luceneVersion
+    fat group: 'org.apache.lucene', name: 'lucene-queries', version: luceneVersion
+//    fat 'org.glassfish.jersey.media:jersey-media-json-jackson:2.13'
+
 }
 
 task fatJar(type: Jar) {
