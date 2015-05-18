@@ -23,6 +23,16 @@ To use this extension:
 
 Optionally this project features a Neo4j unmanaged extension to run regex queries on a manual index. To activate this, set in your ´neo4j-server.properties`
 
-    org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.contrib.fti=/regex
+    org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.contrib.fti=/fti
 
-By sending an http GET to http://localhost:7474/regex/<indexname>/<field>/<regex> you get back a list of node ids matching your query.
+By sending an http GET to http://localhost:7474/fti/<indexname>/<field>/<regex> you get back a list of node ids matching your query.
+
+### populating indexes
+
+To populate a index being setup via `fullTextIndexes`, send a HTTP POST to:
+
+    curl -X POST http://localhost:7474/fti/populate/<indexName>?label=<label>&properties=<property1>&properties=<property2>&batchSize=20000
+    
+`label` is the name of the label to be indexed, `properties` are the property keys to be put into the fulltext index and
+the optional parameter `batchSize` is the size of the transaction defaulting to 10000 ops. 
+For every 100000 index ops a line is printed in `data/log/console.log`.
