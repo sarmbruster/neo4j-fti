@@ -48,7 +48,7 @@ class IndexPopulationExtensionSpec extends Specification {
         setup:
         Neo4jUtils.withSuccessTransaction(neo4j.graphDatabaseService) {
             (0..<1000).each {
-                "create (:Partner {name:{name}})".cypher(name:"Partner${it}".toString())
+                "create (:Partner {name:{name}})".cypher(name: "Partner${it}".toString())
             }
         }
 
@@ -63,8 +63,7 @@ class IndexPopulationExtensionSpec extends Specification {
         when:
         def r = "start n=node:partnerIndex('name:Partner666') return n.name as name".cypher()
 
-                then:
-                IteratorUtil.single(r.columnAs("name")) == "Partner666"
-
+        then:
+        IteratorUtil.single(r.columnAs("name")) == "Partner666"
     }
 }
