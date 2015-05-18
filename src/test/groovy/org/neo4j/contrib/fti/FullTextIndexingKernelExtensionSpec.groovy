@@ -27,6 +27,7 @@ class FullTextIndexingKernelExtensionSpec extends Specification {
     def "should fulltext indexes exist"() {
 
         when: "add something to the index"
+        sleep 2_000
         def indexManager = graphDatabaseService.index()
 
         then:
