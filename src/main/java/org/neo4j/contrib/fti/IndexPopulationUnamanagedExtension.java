@@ -24,7 +24,7 @@ public class IndexPopulationUnamanagedExtension {
     @POST
     @Path("{indexName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response doSearch(@PathParam("indexName") String indexName,
+    public Response populate(@PathParam("indexName") String indexName,
                                @QueryParam("label") String label,
                                @QueryParam("properties") List<String> properties,
                              @QueryParam("batchSize") @DefaultValue("10000") int batchSize
@@ -46,6 +46,9 @@ public class IndexPopulationUnamanagedExtension {
                         tx.success();
                         tx.close();
                         tx = graphDatabaseService.beginTx();
+                    }
+                    if (opsCount % 100_000 == 0) {
+                        System.out.printf("indexed " + opsCount + " nodes\n");
                     }
 
                     Node node = iter.next();
