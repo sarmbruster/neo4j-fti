@@ -5,8 +5,8 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import org.neo4j.extension.spock.Neo4jUtils
 import org.neo4j.graphdb.factory.GraphDatabaseFactory
+import org.neo4j.kernel.impl.logging.NullLogService
 import org.neo4j.kernel.impl.store.NodeStore
-import org.neo4j.kernel.logging.SystemOutLogging
 import org.neo4j.unsafe.impl.batchimport.Configuration
 import org.neo4j.unsafe.impl.batchimport.InputIterable
 import org.neo4j.unsafe.impl.batchimport.InputIterator
@@ -15,7 +15,7 @@ import org.neo4j.unsafe.impl.batchimport.cache.idmapping.IdGenerator
 import org.neo4j.unsafe.impl.batchimport.cache.idmapping.IdGenerators
 import org.neo4j.unsafe.impl.batchimport.cache.idmapping.IdMapper
 import org.neo4j.unsafe.impl.batchimport.cache.idmapping.IdMappers
-import org.neo4j.unsafe.impl.batchimport.input.BadRelationshipsCollector
+import org.neo4j.unsafe.impl.batchimport.input.BadCollector
 import org.neo4j.unsafe.impl.batchimport.input.Collector
 import org.neo4j.unsafe.impl.batchimport.input.Input
 import org.neo4j.unsafe.impl.batchimport.input.InputNode
@@ -72,7 +72,7 @@ class HugeGraphIndexPopulationSpec extends Specification {
 
     @CompileStatic
     private void populateLargeGraph() {
-        def importer = new ParallelBatchImporter(storeDir.root.absolutePath , Configuration.DEFAULT, new SystemOutLogging(), ExecutionMonitors.defaultVisible())
+        def importer = new ParallelBatchImporter(storeDir.root , Configuration.DEFAULT, NullLogService.instance, ExecutionMonitors.defaultVisible())
         importer.doImport(new Input() {
 
             @Override
@@ -139,8 +139,8 @@ class HugeGraphIndexPopulationSpec extends Specification {
             }
 
             @Override
-            Collector<InputRelationship> badRelationshipsCollector(OutputStream out) {
-                return new BadRelationshipsCollector(out, 0)
+            Collector badCollector() {
+                return new BadCollector(System.out, 0, 0 )
             }
         })
 

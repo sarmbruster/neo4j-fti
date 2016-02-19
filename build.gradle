@@ -18,7 +18,7 @@ configurations {
 }
 
 ext {
-    neo4jVersion = "2.2.1"
+    neo4jVersion = "2.3.2"
     jerseyVersion = "1.18.1"
     luceneVersion = "3.6.2" // NB: make sure to use the same version shipping with Neo4j
 }
@@ -36,7 +36,7 @@ dependencies {
     compile group: 'org.apache.lucene', name: 'lucene-smartcn', version: luceneVersion
     compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
     testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
-    testCompile "org.neo4j.contrib:neo4j-spock-extension:0.5.2"
+    testCompile "org.neo4j.contrib:neo4j-spock-extension:0.6.0"
     testCompile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion, classifier: 'tests'
     testCompile group: 'org.neo4j.app', name: 'neo4j-server', version: neo4jVersion, classifier: 'tests'
     testCompile group: 'org.neo4j.app', name: 'neo4j-server', version: neo4jVersion

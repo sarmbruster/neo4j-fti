@@ -20,10 +20,10 @@ public class FullTextIndexingLifeCycle extends LifecycleAdapter {
     private Config config;
     private Future indexCreationFuture;
 
-    public FullTextIndexingLifeCycle(IndexManager indexManager, GraphDatabaseService graphDatabaseService, Config config) {
-        this.indexManager = indexManager;
+    public FullTextIndexingLifeCycle(GraphDatabaseService graphDatabaseService, Config config) {
         this.graphDatabaseService = graphDatabaseService;
         this.config = config;
+        this.indexManager = graphDatabaseService.index();
     }
 
     /*@Override

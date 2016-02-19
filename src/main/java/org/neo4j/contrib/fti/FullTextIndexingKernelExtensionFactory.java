@@ -9,7 +9,6 @@ import org.neo4j.kernel.lifecycle.Lifecycle;
 public class FullTextIndexingKernelExtensionFactory extends KernelExtensionFactory<FullTextIndexingKernelExtensionFactory.DEPENDENCIES> {
 
     public interface DEPENDENCIES {
-        IndexManager getIndexManager();
         GraphDatabaseService getGraphDatabaseService();
         Config getConfig();
     }
@@ -21,7 +20,6 @@ public class FullTextIndexingKernelExtensionFactory extends KernelExtensionFacto
     @Override
     public Lifecycle newKernelExtension(DEPENDENCIES dependencies) throws Throwable {
         return new FullTextIndexingLifeCycle(
-                dependencies.getIndexManager(),
                 dependencies.getGraphDatabaseService(),
                 dependencies.getConfig()
         );
